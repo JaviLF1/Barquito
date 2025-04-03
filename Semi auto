@@ -1,0 +1,114 @@
+
+#define motorRight1 19
+#define motorRight2 18
+#define motorLeft1 5
+#define motorLeft2 17
+#define motorLeftReductor1 21
+#define motorLeftReductor2 22
+#define motorRightReductor1 14
+#define motorRightReductor2 12
+
+#define bottonA 15
+#define bottonB 2
+#define bottonC 4
+#define bottonD 16
+
+#define Receptor 23
+
+int bottonStateA=0;
+int bottonStateB=0;
+int bottonStateC=0;
+int bottonStateD=0;
+int seringeCycle=0;
+
+int ReceptorState=0;
+
+void setup() {
+  // Configurar pines de los motores como salida
+  pinMode(motorRight1, OUTPUT);
+  pinMode(motorRight2, OUTPUT);
+  pinMode(motorLeft1, OUTPUT);
+  pinMode(motorLeft2, OUTPUT);
+  pinMode(motorLeftReductor1, OUTPUT);
+  pinMode(motorLeftReductor2, OUTPUT);
+  pinMode(motorRightReductor1, OUTPUT);
+  pinMode(motorRightReductor2, OUTPUT);
+
+
+  // Configurar pines de los botones como entrada con resistencia pull-up
+  pinMode(bottonA, INPUT);
+  pinMode(bottonB, INPUT);
+  pinMode(bottonC, INPUT);
+  pinMode(bottonD, INPUT);
+  pinMode(Receptor,INPUT);
+
+  digitalWrite(motorLeftReductor1, LOW);
+  digitalWrite(motorRightReductor1,LOW);
+
+
+
+}
+
+void chech(){
+  bottonStateA=digitalRead(bottonA);
+  bottonStateB=digitalRead(bottonB);
+  bottonStateC=digitalRead(bottonC);
+  bottonStateD=digitalRead(bottonD);
+  ReceptorState=digitalRead(Receptor);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  bottonStateA=digitalRead(bottonA);
+  bottonStateB=digitalRead(bottonB);
+  bottonStateC=digitalRead(bottonC);
+  bottonStateD=digitalRead(bottonD);
+  ReceptorState=digitalRead(Receptor);
+
+
+   if(bottonStateA==0){
+     digitalWrite(motorRight1, HIGH);
+     digitalWrite(motorRight2, LOW);
+     chech();
+   }
+   if(bottonStateA==1){
+     digitalWrite(motorRight1, LOW);
+     digitalWrite(motorRight2, HIGH);
+     chech();
+   }
+    
+  if (bottonStateB==0){
+    digitalWrite(motorLeft1, HIGH);
+    digitalWrite(motorLeft2, LOW);
+    chech();
+
+  }
+  if (bottonStateB==1){
+    digitalWrite(motorLeft1, LOW);
+    digitalWrite(motorLeft2, HIGH);
+    chech();
+
+  }
+
+  if (bottonStateC==1){
+      digitalWrite(motorLeftReductor1, HIGH);
+      digitalWrite(motorLeftReductor2, LOW);
+      digitalWrite(motorRightReductor1,HIGH);
+      digitalWrite(motorRightReductor2,LOW);   
+      chech();
+
+  }
+  
+  if (bottonStateD==1){
+
+      digitalWrite(motorLeftReductor1, LOW);
+      digitalWrite(motorLeftReductor2, HIGH);
+      digitalWrite(motorRightReductor1,LOW);
+      digitalWrite(motorRightReductor2,HIGH);
+ 
+    chech();
+    
+  }
+
+}
